@@ -1,0 +1,59 @@
+netrc: entry* %% EOL+
+
+entry:
+| netrc-entry
+| macdef-entry
+
+macdef-entry:
+| macdef-entry-nonempty
+| macdef-entry-empty
+
+macdef-entry-empty: / 'macdef' SPACE* / comment?
+
+macdef-entry-nonempty: mac-def-header macdef-body
+
+mac-def-header: / 'macdef' SPACE+ / macdef-name comment? EOL
+
+macdef-name: / ( NS+ ) /
+
+macdef-body: macdef-body-line* %% EOL
+
+macdef-body-line:
+| netrc-item
+| macdef-commandline
+
+macdef-commandline: / SPACE* ANY+ /
+
+comment: / SPACE+ HASH SPACE* ( ANY* ) /
+
+netrc-entry:
+| netrc-machine-entry
+| netrc-default-entry
+
+netrc-machine-entry: / 'machine' SPACE+ / netrc-value comment? / WS+ / netrc-item-comment+ % / WS+ /
+
+netrc-default-entry: / 'default' SPACE+ / netrc-item-comment+ % / WS+ /
+
+netrc-item-comment: netrc-item comment?
+
+netrc-item:
+| netrc-login
+| netrc-password
+| netrc-account
+
+netrc-login: netrc-login-name / SPACE+ / netrc-value
+netrc-password: netrc-password-name / SPACE+ / netrc-value
+netrc-account: netrc-account-name / SPACE+ / netrc-value
+
+netrc-login-name: / ( '"login"' | 'login' ) /
+netrc-password-name: / ( '"password"' | 'password' ) /
+netrc-account-name: / ( '"account"' | 'account' ) /
+
+netrc-value:
+| quoted-value
+| plain-value
+
+quoted-value: / '"' ( NS+ ) '"' /
+plain-value: / ( NS+ ) /
+
+end: / ( EOL+ | '' ) /

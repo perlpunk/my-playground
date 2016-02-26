@@ -1,0 +1,21 @@
+macdef   bar
+login    baz
+
+machine  "machine.foo1"
+login    nigol "password" pfoo1
+machine  machine.foo2 "login" l2
+password pfoo2 #secret
+account  tnuocca
+default  login "baz" password pfoodefault1
+default  "login" baz password pfoodefault2
+
+macdef
+
+macdef uploadtest
+    cd /pub/tests
+    bin
+    put filename.tar.gz
+    quit
+
+machine boo # this is a helpful comment
+login bla
