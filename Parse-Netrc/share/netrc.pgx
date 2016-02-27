@@ -10,9 +10,9 @@ macdef-entry:
 
 macdef-entry-empty: / 'macdef' SPACE* / comment?
 
-macdef-entry-nonempty: mac-def-header macdef-body
+macdef-entry-nonempty: macdef-header macdef-body
 
-mac-def-header: / 'macdef' SPACE+ / macdef-name comment? EOL
+macdef-header: / 'macdef' SPACE+ / macdef-name comment? EOL
 
 macdef-name: / ( NS+ ) /
 

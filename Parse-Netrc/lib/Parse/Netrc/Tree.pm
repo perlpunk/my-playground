@@ -21,6 +21,14 @@ sub final {
 
 sub got_macdef_entry {
     my ($self, $got) = @_;
+    warn __PACKAGE__.':'.__LINE__.": MACDEF\n";
+    warn __PACKAGE__.':'.__LINE__.$".Data::Dumper->Dump([\$got], ['got']);
+    return $got;
+}
+
+sub got_macdef_header {
+    my ($self, $got) = @_;
+    warn __PACKAGE__.':'.__LINE__.": MACDEF header\n";
     warn __PACKAGE__.':'.__LINE__.$".Data::Dumper->Dump([\$got], ['got']);
     return $got;
 }
