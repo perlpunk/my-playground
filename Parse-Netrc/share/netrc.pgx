@@ -16,13 +16,11 @@ macdef-header: / 'macdef' SPACE+ / macdef-name comment? EOL
 
 macdef-name: / ( NS+ ) /
 
-macdef-body: macdef-body-line* %% EOL
+macdef-body: macdef-netrc macdef-commands
+macdef-netrc: netrc-item-comment* %% / (: SPACE+ | EOL ) /
+macdef-commands: macdef-commandline* %% EOL
 
-macdef-body-line:
-| netrc-item
-| macdef-commandline
-
-macdef-commandline: / SPACE* ANY+ /
+macdef-commandline: / SPACE* ( ANY+ ) /
 
 comment: / SPACE+ HASH SPACE* ( ANY* ) /
 

@@ -10,3 +10,4 @@ my $netrc = Parse::Netrc->read(file => "$Bin/netrc.1");
 isa_ok($netrc, "Parse::Netrc");
 
 my $result = $netrc->parse;
+warn __PACKAGE__.':'.__LINE__.$".Data::Dumper->Dump([\$result], ['result']);

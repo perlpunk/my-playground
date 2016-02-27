@@ -40,6 +40,8 @@ sub parse {
     );
 
     my $result = $parser->parse($self->data);
+    $self->tree($result);
+    return $result;
 }
 
 1;
