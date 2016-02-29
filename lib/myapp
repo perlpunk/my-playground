@@ -1,0 +1,20 @@
+#!/bin/bash
+
+MyApp.weather() {
+    if [[ ${OPTIONS["verbose"]} ]]; then
+        echo "It's rainy and cold =("
+    else
+        echo "rainy =("
+    fi
+}
+
+MyApp.cook() {
+    local with="${OPTIONS["with"]}"
+    if [[ -n "$with" ]]; then
+        echo "cooking with $with"
+    else
+        echo "cooking"
+    fi
+}
+
+

@@ -1,0 +1,160 @@
+/abstract	"This app can do very cool things"
+/appspec/version	"0.001"
+/class	"MyApp"
+/description	"This is a very useful description for myapp.\nThis is a very useful description for myapp.\nThis is a very useful description for myapp.\nThis is a very useful description for myapp.\n"
+/name	"myapp"
+/options/0/aliases/0	"v"
+/options/0/description	"be verbose"
+/options/0/multiple	0
+/options/0/name	"verbose"
+/options/0/required	0
+/options/0/summary	"be verbose"
+/options/0/type	"flag"
+/options/1/aliases/0	"h"
+/options/1/description	"Show command help"
+/options/1/multiple	0
+/options/1/name	"help"
+/options/1/required	0
+/options/1/summary	"Show command help"
+/options/1/type	"flag"
+/subcommands/_complete/name	"_complete"
+/subcommands/_complete/op	"cmd_self_completion"
+/subcommands/_complete/options/0/description	"name of the program"
+/subcommands/_complete/options/0/multiple	0
+/subcommands/_complete/options/0/name	"name"
+/subcommands/_complete/options/0/required	0
+/subcommands/_complete/options/0/summary	"name of the program"
+/subcommands/_complete/options/0/type	"string"
+/subcommands/_complete/options/1/description	"for zsh"
+/subcommands/_complete/options/1/multiple	0
+/subcommands/_complete/options/1/name	"zsh"
+/subcommands/_complete/options/1/required	0
+/subcommands/_complete/options/1/summary	"for zsh"
+/subcommands/_complete/options/1/type	"flag"
+/subcommands/_complete/options/2/description	"for bash"
+/subcommands/_complete/options/2/multiple	0
+/subcommands/_complete/options/2/name	"bash"
+/subcommands/_complete/options/2/required	0
+/subcommands/_complete/options/2/summary	"for bash"
+/subcommands/_complete/options/2/type	"flag"
+/subcommands/_complete/summary	"Generate self completion"
+/subcommands/cook/name	"cook"
+/subcommands/cook/op	"cook"
+/subcommands/cook/options/0/description	"Drink with ..."
+/subcommands/cook/options/0/enum/0	"almond milk"
+/subcommands/cook/options/0/enum/1	"soy milk"
+/subcommands/cook/options/0/enum/2	"oat milk"
+/subcommands/cook/options/0/enum/3	"spelt milk"
+/subcommands/cook/options/0/enum/4	"cow milk"
+/subcommands/cook/options/0/multiple	0
+/subcommands/cook/options/0/name	"with"
+/subcommands/cook/options/0/required	0
+/subcommands/cook/options/0/summary	"Drink with ..."
+/subcommands/cook/options/0/type	"string"
+/subcommands/cook/options/1/aliases/0	"s"
+/subcommands/cook/options/1/description	"add sugar"
+/subcommands/cook/options/1/multiple	0
+/subcommands/cook/options/1/name	"sugar"
+/subcommands/cook/options/1/required	0
+/subcommands/cook/options/1/summary	"add sugar"
+/subcommands/cook/options/1/type	"flag"
+/subcommands/cook/parameters/0/description	""
+/subcommands/cook/parameters/0/enum/0	"tea"
+/subcommands/cook/parameters/0/enum/1	"coffee"
+/subcommands/cook/parameters/0/multiple	0
+/subcommands/cook/parameters/0/name	"drink"
+/subcommands/cook/parameters/0/required	1
+/subcommands/cook/parameters/0/summary	""
+/subcommands/cook/parameters/0/type	"string"
+/subcommands/cook/summary	"Cook something"
+/subcommands/help/name	"help"
+/subcommands/help/op	"cmd_help"
+/subcommands/help/options/0/description	""
+/subcommands/help/options/0/multiple	0
+/subcommands/help/options/0/name	"all"
+/subcommands/help/options/0/required	0
+/subcommands/help/options/0/summary	""
+/subcommands/help/options/0/type	"flag"
+/subcommands/help/subcommand_required	"0"
+/subcommands/help/subcommands/_complete/name	"_complete"
+/subcommands/help/subcommands/_complete/subcommand_required	0
+/subcommands/help/subcommands/cook/name	"cook"
+/subcommands/help/subcommands/cook/subcommand_required	0
+/subcommands/help/subcommands/palindrome/name	"palindrome"
+/subcommands/help/subcommands/palindrome/subcommand_required	0
+/subcommands/help/subcommands/weather/name	"weather"
+/subcommands/help/subcommands/weather/subcommand_required	0
+/subcommands/help/subcommands/weather/subcommands/cities/name	"cities"
+/subcommands/help/subcommands/weather/subcommands/cities/subcommand_required	0
+/subcommands/help/subcommands/weather/subcommands/countries/name	"countries"
+/subcommands/help/subcommands/weather/subcommands/countries/subcommand_required	0
+/subcommands/help/subcommands/weather/subcommands/show/name	"show"
+/subcommands/help/subcommands/weather/subcommands/show/subcommand_required	0
+/subcommands/help/summary	"Show command help"
+/subcommands/palindrome/name	"palindrome"
+/subcommands/palindrome/op	"palindrome"
+/subcommands/palindrome/parameters/0/completion/command_string	"cat /usr/share/dict/words | perl -nle'print if $_ eq reverse $_'\n"
+/subcommands/palindrome/parameters/0/description	""
+/subcommands/palindrome/parameters/0/multiple	0
+/subcommands/palindrome/parameters/0/name	"string"
+/subcommands/palindrome/parameters/0/required	1
+/subcommands/palindrome/parameters/0/summary	""
+/subcommands/palindrome/parameters/0/type	"string"
+/subcommands/palindrome/summary	"Check if a string is a palindrome"
+/subcommands/weather/name	"weather"
+/subcommands/weather/subcommands/cities/name	"cities"
+/subcommands/weather/subcommands/cities/op	"cities"
+/subcommands/weather/subcommands/cities/options/0/aliases/0	"c"
+/subcommands/weather/subcommands/cities/options/0/completion/command/0/replace	"SELF"
+/subcommands/weather/subcommands/cities/options/0/completion/command/1	"weather"
+/subcommands/weather/subcommands/cities/options/0/completion/command/2	"countries"
+/subcommands/weather/subcommands/cities/options/0/description	"country name(s)"
+/subcommands/weather/subcommands/cities/options/0/multiple	1
+/subcommands/weather/subcommands/cities/options/0/name	"country"
+/subcommands/weather/subcommands/cities/options/0/required	0
+/subcommands/weather/subcommands/cities/options/0/summary	"country name(s)"
+/subcommands/weather/subcommands/cities/options/0/type	"string"
+/subcommands/weather/subcommands/cities/summary	"show list of cities"
+/subcommands/weather/subcommands/countries/name	"countries"
+/subcommands/weather/subcommands/countries/op	"countries"
+/subcommands/weather/subcommands/countries/summary	"show list of countries"
+/subcommands/weather/subcommands/show/name	"show"
+/subcommands/weather/subcommands/show/op	"weather"
+/subcommands/weather/subcommands/show/options/0/aliases/0	"T"
+/subcommands/weather/subcommands/show/options/0/description	"show temperature"
+/subcommands/weather/subcommands/show/options/0/multiple	0
+/subcommands/weather/subcommands/show/options/0/name	"temperature"
+/subcommands/weather/subcommands/show/options/0/required	0
+/subcommands/weather/subcommands/show/options/0/summary	"show temperature"
+/subcommands/weather/subcommands/show/options/0/type	"flag"
+/subcommands/weather/subcommands/show/options/1/aliases/0	"C"
+/subcommands/weather/subcommands/show/options/1/description	"show temperature in celcius"
+/subcommands/weather/subcommands/show/options/1/multiple	0
+/subcommands/weather/subcommands/show/options/1/name	"celsius"
+/subcommands/weather/subcommands/show/options/1/required	0
+/subcommands/weather/subcommands/show/options/1/summary	"show temperature in celcius"
+/subcommands/weather/subcommands/show/options/1/type	"flag"
+/subcommands/weather/subcommands/show/options/2/aliases/0	"F"
+/subcommands/weather/subcommands/show/options/2/description	"show temperature in fahrenheit"
+/subcommands/weather/subcommands/show/options/2/multiple	0
+/subcommands/weather/subcommands/show/options/2/name	"fahrenheit"
+/subcommands/weather/subcommands/show/options/2/required	0
+/subcommands/weather/subcommands/show/options/2/summary	"show temperature in fahrenheit"
+/subcommands/weather/subcommands/show/options/2/type	"flag"
+/subcommands/weather/subcommands/show/parameters/0/completion/op	"weather_complete"
+/subcommands/weather/subcommands/show/parameters/0/description	"Specify country"
+/subcommands/weather/subcommands/show/parameters/0/multiple	0
+/subcommands/weather/subcommands/show/parameters/0/name	"country"
+/subcommands/weather/subcommands/show/parameters/0/required	1
+/subcommands/weather/subcommands/show/parameters/0/summary	"Specify country"
+/subcommands/weather/subcommands/show/parameters/0/type	"string"
+/subcommands/weather/subcommands/show/parameters/1/completion/op	"weather_complete"
+/subcommands/weather/subcommands/show/parameters/1/description	"Specify city or cities"
+/subcommands/weather/subcommands/show/parameters/1/multiple	1
+/subcommands/weather/subcommands/show/parameters/1/name	"city"
+/subcommands/weather/subcommands/show/parameters/1/required	1
+/subcommands/weather/subcommands/show/parameters/1/summary	"Specify city or cities"
+/subcommands/weather/subcommands/show/parameters/1/type	"string"
+/subcommands/weather/subcommands/show/summary	"Show Weather forecast"
+/subcommands/weather/summary	"Weather"
+/title	"My Very Cool App"

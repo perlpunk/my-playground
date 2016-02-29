@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PATH=ext/json-bash/lib:$PATH
+source json.bash
+source lib/app-spec
+source lib/myapp
+
+APPSPEC.read "myapp-spec.jsonbash"
+
+APPSPEC.run "$@"
+

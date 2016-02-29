@@ -1,0 +1,93 @@
+#!/bin/bash
+
+declare -A OPTIONS
+declare SPEC
+
+
+APPSPEC.read() {
+    SPEC=$(cat "$1")
+}
+
+APPSPEC.run() {
+    local abstract
+    abstract=$(JSON.get -s '/abstract' SPEC)
+    local class=$(JSON.get -s '/class' SPEC)
+#    echo $abstract
+
+    local options
+    options=$(JSON.object '/options' SPEC)
+    declare -A OPTION_SPEC
+
+    APPSPEC.options-to-spec
+
+    local subcommands
+    subcommands=$(JSON.object '/subcommands' SPEC);
+#    echo "$subcommands"
+
+    local keys=$(JSON.keys '/' subcommands);
+    echo "$keys"
+
+    local op
+    local arg
+#    for arg in "$@"; do
+    while [[ -n "$@" ]]; do
+        local arg=$1
+        echo "arg=$arg"
+
+        if [[ $arg =~ ^--(.*) ]]; then
+            local name=${BASH_REMATCH[1]}
+            local type=${OPTION_SPEC["$name"]}
+            if [[ -z $type ]]; then
+                echo "Unknown option $name" >&2
+                exit 2
+            fi
+            if [[ $type == "bool" ]]; then
+                OPTIONS["$name"]=1
+            else
+                shift
+                if [[ -z "$1" ]]; then
+                    echo "Option $name needs a value" >&2
+                    exit 2
+                fi
+                OPTIONS["$name"]="$1"
+            fi
+        else
+            for possible_cmd in $keys; do
+
+                if [[ $possible_cmd == "$arg" ]]; then
+                    command="$possible_cmd"
+                    cmd_spec=$(JSON.object "/$command" subcommands)
+                    subcommands=$(JSON.object '/subcommands' cmd_spec)
+                    keys=$(JSON.keys '/' subcommands)
+                    local try=$(JSON.get '/op' cmd_spec)
+                    if [[ -n $try ]]; then
+                        op=$(JSON.get -s '/op' cmd_spec)
+                    fi
+                    echo "op=$op"
+
+                    options=$(JSON.object '/options' cmd_spec)
+                    APPSPEC.options-to-spec
+
+                fi
+            done
+
+        fi
+        shift
+
+    done
+
+    if [[ -n $op ]]; then
+        "$class.$op" "$@"
+    fi
+}
+
+APPSPEC.options-to-spec() {
+    for i in $(JSON.keys '/' options); do
+        echo "option $option"
+        local option=$(JSON.object "/$i" options)
+        local name=$(JSON.get -s '/name' option)
+        local opttype=$(JSON.get -s '/type' option)
+        OPTION_SPEC["$name"]="$opttype"
+    done
+}
+
