@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:ingydotnet/test-more-bash.git
+	branch = master
+	commit = 05a1bddbe237bbf2c390048c80ca70d4f66c6a37
+	parent = 8d487b26a087f17ac8ffab8f46406ea716de9816
+	cmdver = 0.3.0

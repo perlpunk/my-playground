@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:ingydotnet/json-bash.git
+	branch = master
+	commit = d94c3085583c9865463c12273e15b704c87d455c
+	parent = d5e27367cd0a035c3e44b8595013da33420527ad
+	cmdver = 0.3.0
