@@ -41,7 +41,7 @@ APPSPEC.run() {
                 echo "Unknown option $name" >&2
                 exit 2
             fi
-            if [[ $type == "bool" ]]; then
+            if [[ $type == "flag" ]]; then
                 OPTIONS["$name"]=1
             else
                 shift
