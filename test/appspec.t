@@ -27,7 +27,7 @@ for i in $keys; do
 
 
 #    echo "ARGS: >>$args<<"
-    (out=$(bin/myapp-bash $args 2>&1) || true; echo OK )
+    out=$(bin/myapp-bash $args 2>&1) || true
     exitcode=$?
 #    echo "CMD >>$args<< exit:$? $exitcode"
 #    echo "OUTPUT: >>$out<<"
