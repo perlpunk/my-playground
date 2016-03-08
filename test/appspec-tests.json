@@ -1,0 +1,170 @@
+[
+   {
+      "args" : [
+         "cook",
+         "tea",
+         "--sugar"
+      ],
+      "stdout" : [
+         {
+            "regex" : "Options: sugar=1"
+         },
+         {
+            "regex" : "Parameters: drink=tea"
+         },
+         {
+            "regex" : "Subcommands: cook"
+         }
+      ],
+      "exit" : "0"
+   },
+   {
+      "stdout" : [
+         {
+            "regex" : "Options: with=almond milk"
+         },
+         {
+            "regex" : "Parameters: drink=tea"
+         },
+         {
+            "regex" : "Subcommands: cook"
+         }
+      ],
+      "args" : [
+         "cook",
+         "tea",
+         "--with",
+         "almond milk"
+      ],
+      "exit" : "0"
+   },
+   {
+      "exit" : "0",
+      "args" : [
+         "help"
+      ],
+      "stdout" : {
+         "regex" : "Usage: myapp <subcommands> \\[options\\]"
+      }
+   },
+   {
+      "stdout" : [
+         {
+            "regex" : "296\\.15K"
+         }
+      ],
+      "args" : [
+         "convert",
+         "temperature",
+         "celsius",
+         "23",
+         "kelvin"
+      ],
+      "exit" : "0"
+   },
+   {
+      "args" : [
+         "cook"
+      ],
+      "exit" : "255",
+      "stderr" : [
+         {
+            "regex" : "Usage: myapp cook <drink> \\[options\\]"
+         },
+         {
+            "regex" : "(?s:drink.*missing)"
+         }
+      ]
+   },
+   {
+      "args" : [
+         "foo"
+      ],
+      "exit" : "255",
+      "stderr" : [
+         {
+            "regex" : "Usage: myapp <subcommands>"
+         },
+         {
+            "regex" : "Unknown subcommand 'foo'"
+         }
+      ]
+   },
+   {
+      "args" : [
+         "cook",
+         "tea",
+         "--with",
+         "salt"
+      ],
+      "stderr" : [
+         {
+            "regex" : "Usage: myapp cook <drink> \\[options\\]"
+         },
+         {
+            "regex" : "(?s:with.*invalid)"
+         }
+      ],
+      "exit" : "255"
+   },
+   {
+      "stderr" : [
+         {
+            "regex" : "Usage: myapp <subcommands>"
+         },
+         {
+            "regex" : "Missing subcommand"
+         }
+      ],
+      "exit" : "255",
+      "args" : []
+   },
+   {
+      "exit" : "0",
+      "stdout" : {
+         "regex" : "Austria\\nGermany\\nNetherlands"
+      },
+      "env" : {
+         "PERL5_APPSPECRUN_COMPLETION_PARAMETER" : "country",
+         "PERL5_APPSPECRUN_SHELL" : "zsh"
+      },
+      "args" : [
+         "weather",
+         "show"
+      ]
+   },
+   {
+      "exit" : "0",
+      "stdout" : [
+         {
+            "regex" : "Amsterdam\\tAmsterdam"
+         },
+         {
+            "regex" : "Echt\\tEcht"
+         }
+      ],
+      "args" : [
+         "weather",
+         "show",
+         "Netherlands"
+      ],
+      "env" : {
+         "PERL5_APPSPECRUN_SHELL" : "bash",
+         "PERL5_APPSPECRUN_COMPLETION_PARAMETER" : "city"
+      }
+   },
+   {
+      "exit" : "0",
+      "stdout" : {
+         "regex" : "^$"
+      },
+      "env" : {
+         "PERL5_APPSPECRUN_COMPLETION_PARAMETER" : "city"
+      },
+      "args" : [
+         "weather",
+         "show",
+         "Netherlands"
+      ]
+   }
+]
