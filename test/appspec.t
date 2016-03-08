@@ -5,6 +5,8 @@ source test/setup
 use Test::More tests 11
 use JSON
 
+set -e
+
 JSON.load "$(< test/appspec-tests.json)" TESTDATA
 #echo $TESTDATA
 keys=$(JSON.keys '/' TESTDATA)
@@ -20,14 +22,14 @@ for i in $keys; do
 #        echo "ARG $j >>$arg<<"
         args+=" $arg"
     done
-#    args="${args/$'\n'/ }"
-#    echo "ARGS: >>$args<<"
-#    stdout=$(JSON
+    stdout=$(JSON.object '/stdout' test)
     testexitcode=$(JSON.get -s '/exit' test)
 
 
-    out=`bin/myapp-bash $cmds 2>&1`
-#    echo "OUTPUT: >>$out<<"
+#    echo "ARGS: >>$args<<"
+    (out=$(bin/myapp-bash $args 2>&1) || true; echo OK )
     exitcode=$?
+#    echo "CMD >>$args<< exit:$? $exitcode"
+#    echo "OUTPUT: >>$out<<"
     is $exitcode $testexitcode "(args=$args) exitcode=$testexitcode"
 done

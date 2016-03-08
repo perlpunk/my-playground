@@ -112,6 +112,11 @@ APPSPEC.run() {
 
     done
 
+    if [[ -z $op ]]; then
+        echo "Error, no op found" >&2
+        exit 255
+    fi
+
     if [[ -n $op ]]; then
         "$class.$op" "$@"
     fi
