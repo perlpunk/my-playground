@@ -1,0 +1,481 @@
+{
+   "name" : "myapp",
+   "markup" : null,
+   "options" : [
+      {
+         "enum" : null,
+         "name" : "verbose",
+         "completion" : null,
+         "multiple" : 0,
+         "required" : 0,
+         "aliases" : [
+            "v"
+         ],
+         "summary" : "be verbose",
+         "description" : "be verbose",
+         "default" : null,
+         "type" : "flag"
+      },
+      {
+         "completion" : null,
+         "multiple" : 0,
+         "required" : 0,
+         "summary" : "Show command help",
+         "aliases" : [
+            "h"
+         ],
+         "description" : "Show command help",
+         "default" : null,
+         "type" : "flag",
+         "enum" : null,
+         "name" : "help"
+      }
+   ],
+   "appspec" : {
+      "version" : "0.001"
+   },
+   "subcommands" : {
+      "weather" : {
+         "name" : "weather",
+         "op" : null,
+         "subcommand_required" : null,
+         "summary" : "Weather",
+         "subcommands" : {
+            "countries" : {
+               "subcommand_required" : null,
+               "op" : "countries",
+               "name" : "countries",
+               "options" : [],
+               "parameters" : [],
+               "subcommands" : {},
+               "summary" : "show list of countries",
+               "description" : null
+            },
+            "show" : {
+               "parameters" : [
+                  {
+                     "name" : "country",
+                     "enum" : null,
+                     "type" : "string",
+                     "description" : "Specify country",
+                     "default" : null,
+                     "filter" : null,
+                     "summary" : "Specify country",
+                     "multiple" : 0,
+                     "completion" : {
+                        "op" : "weather_complete"
+                     },
+                     "required" : 1
+                  },
+                  {
+                     "description" : "Specify city or cities",
+                     "default" : null,
+                     "filter" : null,
+                     "type" : "string",
+                     "summary" : "Specify city or cities",
+                     "multiple" : 1,
+                     "completion" : {
+                        "op" : "weather_complete"
+                     },
+                     "required" : 1,
+                     "name" : "city",
+                     "enum" : null
+                  }
+               ],
+               "subcommands" : {},
+               "summary" : "Show Weather forecast",
+               "options" : [
+                  {
+                     "enum" : null,
+                     "name" : "temperature",
+                     "aliases" : [
+                        "T"
+                     ],
+                     "summary" : "show temperature",
+                     "required" : 0,
+                     "completion" : null,
+                     "multiple" : 0,
+                     "description" : "show temperature",
+                     "default" : null,
+                     "type" : "flag"
+                  },
+                  {
+                     "name" : "celsius",
+                     "enum" : null,
+                     "default" : null,
+                     "description" : "show temperature in celsius",
+                     "type" : "flag",
+                     "summary" : "show temperature in celsius",
+                     "aliases" : [
+                        "C"
+                     ],
+                     "completion" : null,
+                     "required" : 0,
+                     "multiple" : 0
+                  },
+                  {
+                     "type" : "flag",
+                     "description" : "show temperature in fahrenheit",
+                     "default" : null,
+                     "summary" : "show temperature in fahrenheit",
+                     "aliases" : [
+                        "F"
+                     ],
+                     "multiple" : 0,
+                     "completion" : null,
+                     "required" : 0,
+                     "name" : "fahrenheit",
+                     "enum" : null
+                  }
+               ],
+               "description" : null,
+               "subcommand_required" : null,
+               "name" : "show",
+               "op" : "weather"
+            },
+            "cities" : {
+               "op" : "cities",
+               "subcommand_required" : null,
+               "name" : "cities",
+               "options" : [
+                  {
+                     "description" : "country name(s)",
+                     "default" : null,
+                     "type" : "string",
+                     "aliases" : [
+                        "c"
+                     ],
+                     "summary" : "country name(s)",
+                     "required" : 0,
+                     "completion" : {
+                        "command" : [
+                           {
+                              "replace" : "SELF"
+                           },
+                           "weather",
+                           "countries"
+                        ]
+                     },
+                     "multiple" : 1,
+                     "name" : "country",
+                     "enum" : null
+                  }
+               ],
+               "parameters" : [],
+               "subcommands" : {},
+               "summary" : "show list of cities",
+               "description" : null
+            }
+         },
+         "parameters" : [],
+         "options" : [],
+         "description" : null
+      },
+      "convert" : {
+         "op" : "convert",
+         "name" : "convert",
+         "subcommand_required" : null,
+         "parameters" : [
+            {
+               "name" : "type",
+               "enum" : null,
+               "default" : null,
+               "description" : "The type of unit to convert",
+               "filter" : null,
+               "type" : "string",
+               "required" : 1,
+               "completion" : {
+                  "op" : "convert_complete"
+               },
+               "multiple" : 0,
+               "summary" : "The type of unit to convert"
+            },
+            {
+               "type" : "string",
+               "description" : "The source unit to convert from",
+               "default" : null,
+               "filter" : null,
+               "completion" : {
+                  "op" : "convert_complete"
+               },
+               "multiple" : 0,
+               "required" : 1,
+               "summary" : "The source unit to convert from",
+               "name" : "source",
+               "enum" : null
+            },
+            {
+               "summary" : "The value to convert",
+               "required" : 1,
+               "completion" : null,
+               "multiple" : 0,
+               "description" : "The value to convert",
+               "default" : null,
+               "filter" : null,
+               "type" : "string",
+               "enum" : null,
+               "name" : "value"
+            },
+            {
+               "enum" : null,
+               "name" : "target",
+               "multiple" : 1,
+               "completion" : {
+                  "op" : "convert_complete"
+               },
+               "required" : 1,
+               "summary" : "The target unit",
+               "type" : "string",
+               "description" : "The target unit",
+               "default" : null,
+               "filter" : null
+            }
+         ],
+         "subcommands" : {},
+         "summary" : "Various unit conversions",
+         "options" : [],
+         "description" : null
+      },
+      "_complete" : {
+         "description" : null,
+         "options" : [
+            {
+               "multiple" : 0,
+               "completion" : null,
+               "required" : 0,
+               "summary" : "name of the program",
+               "aliases" : [],
+               "type" : "string",
+               "description" : "name of the program",
+               "default" : null,
+               "enum" : null,
+               "name" : "name"
+            },
+            {
+               "type" : "flag",
+               "default" : null,
+               "description" : "for zsh",
+               "summary" : "for zsh",
+               "aliases" : [],
+               "required" : 0,
+               "completion" : null,
+               "multiple" : 0,
+               "name" : "zsh",
+               "enum" : null
+            },
+            {
+               "name" : "bash",
+               "enum" : null,
+               "type" : "flag",
+               "default" : null,
+               "description" : "for bash",
+               "summary" : "for bash",
+               "aliases" : [],
+               "completion" : null,
+               "multiple" : 0,
+               "required" : 0
+            }
+         ],
+         "parameters" : [],
+         "subcommands" : {},
+         "summary" : "Generate self completion",
+         "name" : "_complete",
+         "op" : "cmd_self_completion",
+         "subcommand_required" : null
+      },
+      "cook" : {
+         "op" : "cook",
+         "name" : "cook",
+         "subcommand_required" : null,
+         "options" : [
+            {
+               "aliases" : [],
+               "summary" : "Drink with ...",
+               "completion" : null,
+               "multiple" : 0,
+               "required" : 0,
+               "default" : null,
+               "description" : "Drink with ...",
+               "type" : "string",
+               "enum" : [
+                  "almond milk",
+                  "soy milk",
+                  "oat milk",
+                  "spelt milk",
+                  "cow milk"
+               ],
+               "name" : "with"
+            },
+            {
+               "enum" : null,
+               "name" : "sugar",
+               "multiple" : 0,
+               "required" : 0,
+               "completion" : null,
+               "aliases" : [
+                  "s"
+               ],
+               "summary" : "add sugar",
+               "type" : "flag",
+               "description" : "add sugar",
+               "default" : null
+            }
+         ],
+         "summary" : "Cook something",
+         "subcommands" : {},
+         "parameters" : [
+            {
+               "enum" : [
+                  "tea",
+                  "coffee"
+               ],
+               "name" : "drink",
+               "summary" : "",
+               "completion" : null,
+               "required" : 1,
+               "multiple" : 0,
+               "type" : "string",
+               "default" : null,
+               "filter" : null,
+               "description" : ""
+            }
+         ],
+         "description" : null
+      },
+      "help" : {
+         "description" : null,
+         "summary" : "Show command help",
+         "subcommands" : {
+            "palindrome" : {
+               "parameters" : [],
+               "summary" : null,
+               "subcommands" : {},
+               "options" : [],
+               "description" : null,
+               "op" : null,
+               "name" : "palindrome",
+               "subcommand_required" : 0
+            },
+            "_complete" : {
+               "description" : null,
+               "parameters" : [],
+               "subcommands" : {},
+               "summary" : null,
+               "options" : [],
+               "name" : "_complete",
+               "subcommand_required" : 0,
+               "op" : null
+            },
+            "cook" : {
+               "options" : [],
+               "parameters" : [],
+               "summary" : null,
+               "subcommands" : {},
+               "description" : null,
+               "subcommand_required" : 0,
+               "name" : "cook",
+               "op" : null
+            },
+            "convert" : {
+               "description" : null,
+               "summary" : null,
+               "subcommands" : {},
+               "parameters" : [],
+               "options" : [],
+               "subcommand_required" : 0,
+               "op" : null,
+               "name" : "convert"
+            },
+            "weather" : {
+               "subcommand_required" : 0,
+               "name" : "weather",
+               "op" : null,
+               "description" : null,
+               "summary" : null,
+               "subcommands" : {
+                  "show" : {
+                     "subcommand_required" : 0,
+                     "name" : "show",
+                     "op" : null,
+                     "summary" : null,
+                     "subcommands" : {},
+                     "parameters" : [],
+                     "options" : [],
+                     "description" : null
+                  },
+                  "countries" : {
+                     "op" : null,
+                     "name" : "countries",
+                     "subcommand_required" : 0,
+                     "description" : null,
+                     "summary" : null,
+                     "subcommands" : {},
+                     "parameters" : [],
+                     "options" : []
+                  },
+                  "cities" : {
+                     "description" : null,
+                     "options" : [],
+                     "subcommands" : {},
+                     "summary" : null,
+                     "parameters" : [],
+                     "op" : null,
+                     "subcommand_required" : 0,
+                     "name" : "cities"
+                  }
+               },
+               "parameters" : [],
+               "options" : []
+            }
+         },
+         "parameters" : [],
+         "options" : [
+            {
+               "type" : "flag",
+               "default" : null,
+               "description" : "",
+               "summary" : "",
+               "aliases" : [],
+               "required" : 0,
+               "completion" : null,
+               "multiple" : 0,
+               "name" : "all",
+               "enum" : null
+            }
+         ],
+         "name" : "help",
+         "subcommand_required" : "0",
+         "op" : "cmd_help"
+      },
+      "palindrome" : {
+         "subcommand_required" : null,
+         "op" : "palindrome",
+         "name" : "palindrome",
+         "summary" : "Check if a string is a palindrome",
+         "subcommands" : {},
+         "parameters" : [
+            {
+               "summary" : "",
+               "required" : 1,
+               "completion" : {
+                  "command_string" : "cat /usr/share/dict/words | perl -nle'print if $_ eq reverse $_'\n"
+               },
+               "multiple" : 0,
+               "type" : "string",
+               "description" : "",
+               "default" : null,
+               "filter" : null,
+               "enum" : null,
+               "name" : "string"
+            }
+         ],
+         "options" : [],
+         "description" : null
+      }
+   },
+   "abstract" : "This app can do very cool things",
+   "description" : "This is a very useful description for myapp.\nThis is a very useful description for myapp.\nThis is a very useful description for myapp.\nThis is a very useful description for myapp.\n",
+   "class" : "MyApp",
+   "title" : "My Very Cool App"
+}
+

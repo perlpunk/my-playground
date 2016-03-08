@@ -5,7 +5,7 @@ source json.bash
 source lib/app-spec
 source lib/myapp
 
-APPSPEC.read "myapp-spec.jsonbash"
+APPSPEC.read "myapp-spec.json"
 
 APPSPEC.run "$@"
 

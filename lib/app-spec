@@ -5,7 +5,7 @@ declare SPEC
 
 
 APPSPEC.read() {
-    SPEC=$(cat "$1")
+    JSON.load "$(< $1)" SPEC
 }
 
 APPSPEC.run() {
@@ -17,6 +17,7 @@ APPSPEC.run() {
     local options
     options=$(JSON.object '/options' SPEC)
     declare -A OPTION_SPEC
+    declare -A OPTION_ALIASES
 
     APPSPEC.options-to-spec
 
@@ -25,7 +26,7 @@ APPSPEC.run() {
 #    echo "$subcommands"
 
     local keys=$(JSON.keys '/' subcommands);
-    echo "$keys"
+#    echo "$keys"
 
     local op
     local arg
@@ -34,23 +35,58 @@ APPSPEC.run() {
         local arg=$1
         echo "arg=$arg"
 
-        if [[ $arg =~ ^--(.*) ]]; then
-            local name=${BASH_REMATCH[1]}
-            local type=${OPTION_SPEC["$name"]}
-            if [[ -z $type ]]; then
-                echo "Unknown option $name" >&2
-                exit 2
-            fi
-            if [[ $type == "flag" ]]; then
-                OPTIONS["$name"]=1
-            else
-                shift
-                if [[ -z "$1" ]]; then
-                    echo "Option $name needs a value" >&2
+        if [[ $arg =~ ^- ]]; then
+
+            local optname
+            if [[ $arg =~ ^--(.*) ]]; then
+                optname=${BASH_REMATCH[1]}
+                local type=${OPTION_SPEC["$optname"]}
+                if [[ -z $type ]]; then
+                    echo "Unknown option '$optname'" >&2
                     exit 2
                 fi
-                OPTIONS["$name"]="$1"
+                if [[ $type == "flag" ]]; then
+                    OPTIONS["$optname"]=1
+                else
+                    shift
+                    if [[ -z "$1" ]]; then
+                        echo "Option '$optname' needs a value" >&2
+                        exit 2
+                    fi
+                    OPTIONS["$optname"]="$1"
+                fi
+
+            elif [[ $arg =~ ^-(.*) ]]; then
+                local short=${BASH_REMATCH[1]}
+                for (( i=0; i < ${#short}; i++ )); do
+                    local alias="${short:$i:1}"
+                    optname=${OPTION_ALIASES["$alias"]}
+                    local type=${OPTION_SPEC["$optname"]}
+                    if [[ -z $optname ]]; then
+                        echo "Option '$alias' unknown"
+                        exit 2;
+                    fi
+                    echo "ALIAS $alias -> $optname"
+
+                    if [[ $type == "flag" ]]; then
+                        OPTIONS["$optname"]=1
+                    else
+                        shift
+                        if [[ -z "$1" ]]; then
+                            echo "Option '$optname' needs a value" >&2
+                            exit 2
+                        fi
+                        OPTIONS["$optname"]="$1"
+                    fi
+
+                done
+
             fi
+            if [[ -z $optname ]]; then
+                echo "Error arg='$arg'"
+                exit 2;
+            fi
+
         else
             for possible_cmd in $keys; do
 
@@ -83,10 +119,20 @@ APPSPEC.run() {
 
 APPSPEC.options-to-spec() {
     for i in $(JSON.keys '/' options); do
-        echo "option $option"
+#        echo "option $option"
         local option=$(JSON.object "/$i" options)
         local name=$(JSON.get -s '/name' option)
         local opttype=$(JSON.get -s '/type' option)
+        local aliases=$(JSON.object '/aliases' option)
+        if [[ -n "$aliases" ]]; then
+            local keys=$(JSON.keys '/' aliases)
+            for i in $keys; do
+                local alias=$(JSON.get -s "/$i" aliases)
+#                echo "alias '$i' = $alias"
+                OPTION_ALIASES["$alias"]="$name"
+            done
+        fi
+#        echo "option $name aliases:$aliases"
         OPTION_SPEC["$name"]="$opttype"
     done
 }

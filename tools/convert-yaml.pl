@@ -14,6 +14,11 @@ my $spec = App::Spec->read(shift);
 my $class = $spec->class;
 $class =~ s/.*:://;
 $spec->class($class);
+my $structure = structure($spec);
+my $js = JSON::XS->new->pretty;
+my $json = $js->encode($structure);
+say $json;
+exit;
 
 my $json_bash = json_bash($spec);
 say $json_bash;
