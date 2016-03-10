@@ -3,22 +3,16 @@
 MyApp.weather() {
     echo "commands=weather show"
     dump-options
-#    if [[ ${OPTIONS["verbose"]} ]]; then
-#        echo "It's rainy and cold =("
-#    else
-#        echo "rainy =("
-#    fi
 }
 
 MyApp.cook() {
     echo "commands=cook"
     dump-options
-#    local with="${OPTIONS["with"]}"
-#    if [[ -n "$with" ]]; then
-#        echo "cooking with $with"
-#    else
-#        echo "cooking"
-#    fi
+}
+
+MyApp.convert() {
+    echo "commands=convert"
+    dump-options
 }
 
 dump-options() {
