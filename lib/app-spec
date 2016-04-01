@@ -25,8 +25,8 @@ APPSPEC.run() {
     subcommands=$(JSON.object '/subcommands' SPEC);
 #    echo "$subcommands"
 
-    local keys=$(JSON.keys '/' subcommands);
-#    echo "$keys"
+    local subcmdnames=($(JSON.keys '/' subcommands))
+#    echo "${subcmdnames[@]}"
 
     local op
     local arg
@@ -88,13 +88,13 @@ APPSPEC.run() {
             fi
 
         else
-            for possible_cmd in $keys; do
+            for possible_cmd in "${subcmdnames[@]}"; do
 
                 if [[ $possible_cmd == "$arg" ]]; then
                     command="$possible_cmd"
                     cmd_spec=$(JSON.object "/$command" subcommands)
                     subcommands=$(JSON.object '/subcommands' cmd_spec)
-                    keys=$(JSON.keys '/' subcommands)
+                    subcmdnames=($(JSON.keys '/' subcommands))
                     local try=$(JSON.get '/op' cmd_spec)
                     if [[ -n $try ]]; then
                         op=$(JSON.get -s '/op' cmd_spec)
