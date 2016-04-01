@@ -28,8 +28,8 @@ for k in "${keys[@]}"; do
 #    echo "CMD >>${args[@]}<< exit:$exitcode"
 #    echo "stdout: >>$out<<"
 #    echo "stderr: >>$err<<"
-    is "$exitcode" "$testexitcode" \
-        "(args=${args[@]}) exitcode=$testexitcode"
+    label="args=(${args[@]}) exitcode=$testexitcode"
+    is "$exitcode" "$testexitcode" "$label"
 done
 
 rm "$tempfile"
